@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Details Page</title>
+</head>
+    <body>
+	<script  type="text/javascript" >
+	
+		var arr= new Array();
+
+
+	
+	
+	
+	function showData(){
+		var str = localStorage.getItem("localData");
+		if(str != null)
+			arr = JSON.parse(str);
+		
+		
+		var tbl = document.getElementById("dataTable");
+		
+		var x =tbl.rows.length;
+		while(--x){
+			tbl.deleteRow(x);
+		}
+		
+		for(i=0;i<arr.length;i++){
+		
+			var r = tbl.insertRow();
+			
+			var cell1 = r.insertCell();
+			var cell2 = r.insertCell();
+			var cell3 = r.insertCell();
+			var cell4 = r.insertCell();
+			var cell0 = r.insertCell();
+			var cell5 = r.insertCell();
+			
+			
+			
+			cell1.innerHTML = arr[i].name;
+			cell2.innerHTML = arr[i].email;
+			cell3.innerHTML = arr[i].phone;
+			cell4.innerHTML = arr[i].message;
+			cell0.innerHTML ='<TD><button onclick="deleteRow(this)">delete</button></TD>'
+			cell5.innerHTML = '<button id="btn" onclick = "load(event);"  >Load</button>';
+			var strr = JSON.stringify(arr[i]);
+			cell5.lastChild.value =  strr;
+			
+			
+		}
+		
+	}
+	
+	
+	function load(ev){
+			window.location = "index.html";
+			let data = localStorage.setItem("tabc",ev.target.value);
+			alert("Redirecting to homepage");
+			
+			}
+	
+	function deleteRow(elem) {
+		var table = elem.parentNode.parentNode.parentNode;
+		var rowCount = table.rows.length;
+		var row = elem.parentNode.parentNode; 
+		row.parentNode.removeChild(row); 
+		
+	}
+	
+
+		
+	
+	
+			
+		
+			
+	//**** * *
+	</script>
+	
+	<form>
+		<h3 style="color:black;"> Details</h3>	
+		<table id="dataTable" class="tableStl" border=1>
+		<tr>
+			
+			<th>Name</th>
+			<th>Email</th>
+			<th>Phone Number</th>
+			<th>Message</th>
+			<th>Delete</th>
+			<th>Load</th>
+			
+		</tr>
+		</table>
+		<script>
+		showData();
+		</script>
+	</form>					
+	
+	
+	
+	
+	
+	
+	
+	
+	
+						
+        <form action="index.html">
+            <button >Go Back</button>
+        </form>
+		
+	
+		
+		
+    </body>
+</html>
